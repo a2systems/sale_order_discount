@@ -1,0 +1,51 @@
+<odoo>
+
+    <record model="ir.ui.view" id="magnolia_sale_order_view_form">  
+        <field name="name">magnolia.sale.order.view.form</field>
+	<field name="model">sale.order</field>
+	<field name="inherit_id" ref="sale.view_order_form"></field>
+	<field name="arch" type="xml">
+		<field name="state" position="before">
+			<button name="btn_add_discount"
+				type="object"
+				states="draft,sent"
+				string="Agregar descuentos" />
+		</field>
+		<xpath expr="//field[@name='order_line']/tree/field[@name='discount']" position="after">
+			<field name="discount_amt_usd" optional="hide"/>
+		</xpath>
+	</field>
+</record>
+
+
+    <record id="view_sale_order_line_discount_tree" model="ir.ui.view">
+        <field name="name">sale.order.line.discount.tree</field>
+        <field name="model">sale.order.line</field>
+        <field name="arch" type="xml">
+	   <tree edit="0" create="0" delete="0">
+                <field name="order_id" />
+                <field name="order_partner_id" />
+                <field name="product_id" />
+                <field name="create_date" />
+                <field name="discount" />
+                <field name="discount_amt_usd" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_sale_order_line_discount">
+        <field name="name">Descuentos Otorgados</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order.line</field>
+        <field name="view_mode">tree,form,pivot</field>
+    </record>
+
+    <menuitem
+        id="menu_sale_order_line_import"
+	    name="Descuentos Otorgados"
+	    action="action_sale_order_line_discount"
+	    parent="sale.sale_order_menu"
+	    sequence="200"
+    />
+
+</odoo>

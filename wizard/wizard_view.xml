@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record id="sale_order_discount_wizard_view" model="ir.ui.view">
+            <field name="name">Sale Order Discount Wizard</field>
+            <field name="model">sale.order.discount.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Sale Order Customer Wizard">
+                    <sheet>
+			    <group>
+				    <field name="order_id" readonly="1"/>
+				    <field name="discount" />
+				    <field name="discount_amount" readonly="1"/>
+                           </group>
+                    </sheet>
+                    <footer>
+                        <button string="Confirm" name="btn_confirm" type="object" default_focus="1" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+    </record>
+
+</odoo>
